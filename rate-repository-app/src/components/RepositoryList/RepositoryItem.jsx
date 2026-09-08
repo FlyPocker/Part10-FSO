@@ -51,7 +51,7 @@ const RepostoryItem = ({ repository }) => {
                 <Text fontWeight="bold" fontSize="subheading">{repository.fullName}</Text>
                 <Text color="textSecondary">{repository.description}</Text>
                 <View style={styles.languageTag}>
-                  <Text color="textAppBar" fontWeight="bold">{repository.language}</Text>
+                  <Text color="textWhite" fontWeight="bold">{repository.language}</Text>
                 </View>
             </View>
         </View>
