@@ -1,6 +1,8 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import Text from '../Text';
 import theme from '../../theme';
+import Pressable from '../Pressable';
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +34,12 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     padding: 5,
     borderRadius: 5,
-  }
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 5,
+  },
 });
 
 const DisplayStat = ({ value }) => {
@@ -40,12 +47,15 @@ const DisplayStat = ({ value }) => {
   return <Text fontWeight="bold">{displayValue}</Text>;
 }
 
-const RepostoryItem = ({ repository }) => {
+const RepostoryItem = ({ repository, showGitButton }) => {
   return (
-    <View style={styles.container}>
+    <View testID="RepositoryItem" style={styles.container}>
         <View style={styles.topContainer}>
             <View style={styles.avatarContainer}>
-                <Text>Avatar</Text>
+                <Image
+                  style={styles.avatar}
+                  source={{ uri: repository.ownerAvatarUrl }}
+                />
             </View>
             <View style={styles.infoContainer}>
                 <Text fontWeight="bold" fontSize="subheading">{repository.fullName}</Text>
@@ -73,6 +83,13 @@ const RepostoryItem = ({ repository }) => {
                 <Text>Rating</Text>
             </View>
         </View>
+        {showGitButton && (
+          <Pressable onPress={() => {Linking.openURL(repository.url)}}>
+            <View style={{ padding: 12, backgroundColor: theme.colors.primary, borderRadius: 4, marginTop: 10 }}>
+              <Text color="textWhite" fontWeight="bold">Open in GitHub</Text>
+            </View>
+          </Pressable>
+        )}
       </View>
   );
 }
