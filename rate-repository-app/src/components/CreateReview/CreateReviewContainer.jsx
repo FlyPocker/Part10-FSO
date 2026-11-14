@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CreateReviewContainer = ({ onSubmit }) => {
+const CreateReviewContainer = ({ onSubmit, error }) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -64,6 +64,7 @@ const CreateReviewContainer = ({ onSubmit }) => {
 
   return (
     <View style={styles.container}>
+      {error && <Text color="textRed">Unable to create the review. Please check the repository details and try again.</Text>}
       {renderField('ownerName', 'Repository owner name')}
       {renderField('repositoryName', 'Repository name')}
       {renderField('rating', 'Rating', {

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignInContainer = ({ onSubmit }) => {
+const SignInContainer = ({ onSubmit, error }) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -31,6 +31,7 @@ const SignInContainer = ({ onSubmit }) => {
 
   return (
     <View style={styles.container}>
+      {error && <Text color="textRed">Unable to sign in. Please check your credentials and try again.</Text>}
       <TextInput
         placeholder="Username"
         color={formik.touched.username && formik.errors.username ? 'error' : undefined}

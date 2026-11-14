@@ -33,7 +33,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const formatDate = (createdAt) => new Date(createdAt).toLocaleDateString();
+const formatDate = (createdAt) => {
+  const date = new Date(createdAt);
+  if (Number.isNaN(date.getTime())) {
+    return 'Unknown date';
+  }
+
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  return `${String(date.getDate()).padStart(2, '0')} ${
+    months[date.getMonth()]
+  } ${date.getFullYear()}`;
+};
 
 const ReviewItem = ({ review, onViewRepository, onDelete }) => (
   <View testID="ReviewItem" style={styles.container}>

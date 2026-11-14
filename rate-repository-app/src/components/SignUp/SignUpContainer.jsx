@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignUpContainer = ({ onSubmit }) => {
+const SignUpContainer = ({ onSubmit, error }) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -65,6 +65,7 @@ const SignUpContainer = ({ onSubmit }) => {
 
   return (
     <View style={styles.container}>
+      {error && <Text color="textRed">Unable to create the account. Please try again.</Text>}
       {renderField('username', 'Username')}
       {renderField('password', 'Password', { secureTextEntry: true })}
       {renderField('passwordConfirmation', 'Password confirmation', {

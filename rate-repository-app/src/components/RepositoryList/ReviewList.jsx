@@ -39,8 +39,12 @@ const ReviewList = () => {
           text: 'Delete',
           style: 'destructive',
           onPress: async () => {
-            await deleteReview({ variables: { id: review.id } });
-            await refetch();
+            try {
+              await deleteReview({ variables: { id: review.id } });
+              await refetch();
+            } catch {
+              Alert.alert('Unable to delete review', 'Please try again.');
+            }
           },
         },
       ],
